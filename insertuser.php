@@ -23,12 +23,12 @@ mysqli_query($conn,"SET NAMES utf8"); //選擇編碼
 <?php
 $id=mysqli_real_escape_string($conn,$_POST['id']);
 $pwd=mysqli_real_escape_string($conn,$_POST['pwd']);
-$nick=mysqli_real_escape_string($conn,$_POST['nick']);
+$name=mysqli_real_escape_string($conn,$_POST['pname']);
 
 if ($id) {
-    $sql = "insert into player (account, password) values ('$id', '$pwd');";
+    $sql = "insert into player (account, password, pname) values ('$id', '$pwd', '$name');";
     mysqli_query($conn,$sql) or die("MySQL insert message error"); //執行SQL
-    echo "player added.";
+    echo "player registered.";
 } else {
 	echo "empty id, cannot insert.";
 }
