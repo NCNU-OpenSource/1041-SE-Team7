@@ -96,12 +96,12 @@ if ($rs=mysqli_fetch_array($results)) {
             if($i%3==0){
                 echo"<label>",
                     "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\"></label></br>";
+                    "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label></br>";
             }
             else{
                 echo"<label>",
                     "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\"></label>";
+                    "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label>";
             }
         }
         for($i=1;$i<=9-$farm;$i++){
@@ -123,12 +123,12 @@ if ($rs=mysqli_fetch_array($results)) {
                 if($i%3==0){
                     echo"<label>",
                         "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                        "<img src=\"1.jpg\"></label></br>";
+                        "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label></br>";
                 }
                 else{
                     echo"<label>",
                         "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                        "<img src=\"1.jpg\"></label>";
+                        "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label>";
                 }
             }
             $sql3 = "select count(needlevel) from player , farm where pname='$id' and level>=needlevel ";
@@ -139,11 +139,11 @@ if ($rs=mysqli_fetch_array($results)) {
                 for($i=1;$i<=$buyfarm;$i++){                //印出可以買的田
                     if(($i+($farm%3))%3==0){
                         echo"<a href='buy.php?nextfarm=".$nextfarm."' OnClick=\"return confirm('確定要購買嗎？')\";>
-                            <img src=\"3.jpg\"></a></br>";
+                            <img src=\"3.gif\"></a></br>";
                     }
                     else{
                         echo"<a href='buy.php?nextfarm=".$nextfarm."' OnClick=\"return confirm('確定要購買嗎？')\";>
-                            <img src=\"3.jpg\"></a>";
+                            <img src=\"3.gif\"></a>";
                     }
                 }
             }
