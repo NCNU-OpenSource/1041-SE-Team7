@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2015-12-01: 12:08:13
+-- 產生時間： 2015-12-02: 07:50:22
 -- 伺服器版本: 5.6.24
 -- PHP 版本： 5.6.8
 
@@ -86,17 +86,17 @@ CREATE TABLE IF NOT EXISTS `farmplayer` (
   `farmID` int(11) NOT NULL,
   `pname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `cID` int(11) NOT NULL DEFAULT '0',
-  `ptime` time NOT NULL,
-  `htime` time NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `ptime` int(11) NOT NULL,
+  `htime` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 資料表的匯出資料 `farmplayer`
 --
 
 INSERT INTO `farmplayer` (`ID`, `farmID`, `pname`, `cID`, `ptime`, `htime`) VALUES
-(1, 1, '精子', 1, '18:29:02', '18:29:12'),
-(2, 2, '精子', 3, '18:29:47', '00:00:00');
+(1, 1, 'user', 1, 182902, 182912),
+(2, 2, 'user', 3, 182947, 0);
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   `exp` int(11) NOT NULL DEFAULT '0',
   `energy` int(11) NOT NULL DEFAULT '30',
   `money` int(11) NOT NULL DEFAULT '100',
-  `logintime` int(11) NOT NULL
+  `logintime` int(40) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -141,8 +141,8 @@ CREATE TABLE IF NOT EXISTS `player` (
 --
 
 INSERT INTO `player` (`pID`, `pname`, `account`, `password`, `level`, `exp`, `energy`, `money`, `logintime`) VALUES
-(1, '精子', 'a87569650', 'a7741520', 5, 0, 30, 100, 0),
-(2, 'a', '111', '111', 3, 0, 30, 100, 2147483647),
+(1, 'user', 'user', 'user', 5, 0, 30, 100, 191150),
+(2, 'a', '111', '111', 3, 0, 30, 0, 191306),
 (3, '222', '222', '222', 1, 0, 30, 100, 2147483647);
 
 --
@@ -197,7 +197,7 @@ ALTER TABLE `farm`
 -- 使用資料表 AUTO_INCREMENT `farmplayer`
 --
 ALTER TABLE `farmplayer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- 使用資料表 AUTO_INCREMENT `food`
 --
