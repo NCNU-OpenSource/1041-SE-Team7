@@ -32,7 +32,7 @@ if ($id) {
 } else {
 	echo "empty id, cannot insert.";
 }
-header("Refresh:3;url=index.php");
+header("Refresh:3;url=index.php");//
 ?>
 </p>
 </body>
