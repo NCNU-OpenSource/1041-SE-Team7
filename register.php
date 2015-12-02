@@ -33,6 +33,7 @@ body{
 <div id="rr" align="center">
 帳號: <input type="text" name="id"><br />
 密碼: <input type="password" name="pwd"><br />
+姓名: <input type="text" name="pname"><br />
 <input type="submit">
 <input type="reset">
 </div>
