@@ -32,17 +32,24 @@ $b=$_POST['farm'];
 //玩家種植或採收都會損失體力與金錢 
 //每次種植或採收會賺取經驗值 
 //不同作物有不同的成熟時間，成熟後可以採收賣掉換成錢
+$sqla = "select costtime from crops where cID='$a'";
+$results=mysqli_query($conn,$sqla);
+$rs=mysqli_fetch_array($results);
 
+
+
+$sqlb = "update farmplayer set cID='$a' , ptime=CURRENT_TIME , htime=CURRENT_TIME+".$rs['costtime']." where pname=\"$id\" and farmID=\"$b\"";
+mysqli_query($conn,$sqlb)or die("MySQL query error");
+
+/*
 $sql = "select  money , pcostenergy , costtime , crops.costmoney , pexp from player , crops , farm where player.pname=\"$id\" and cID=\"$a\" and farmID=\"$b\"";
 $results=mysqli_query($conn,$sql);
 
 while (	$rs=mysqli_fetch_array($results)) {
-    echo "<input type=\"radio\" name=\"crops\" id=\"crops\"value=\"";
-    echo $rs["cID"] ;
-    echo"\"></input>";
-    echo $rs["cname"];
+    echo $a,$b;
+    
 }
-
+*/
 
 ?>
 </div>
