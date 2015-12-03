@@ -38,7 +38,7 @@ $rs=mysqli_fetch_array($results);
 
 
 
-$sqlb = "update farmplayer set cID='$a' , ptime=CURRENT_TIME , htime=CURRENT_TIME+".$rs['costtime']." where pname=\"$id\" and farmID=\"$b\"";
+$sqlb = "update farmplayer set cID='$a' , ptime=CURRENT_TIME , htime=CURRENT_TIME+".$rs['costtime']." , status=1 where pname=\"$id\" and farmID=\"$b\"";
 mysqli_query($conn,$sqlb)or die("MySQL query error");
 
 /*
