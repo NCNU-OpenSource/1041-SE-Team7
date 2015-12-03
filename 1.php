@@ -27,7 +27,6 @@ body{
     text-align:right;
 }
 #b{
-    background-image:url(1.jpg); 
     width:48px; 
     height:48px;
 }
@@ -58,7 +57,7 @@ body{
     echo"</div>";
     $sql1 = "select  * from player  where pname='$id'";
     $results=mysqli_query($conn,$sql1);
-    if ($rows=mysqli_fetch_array($results)) {
+    if($rows=mysqli_fetch_array($results)){
         echo"<div id=\"column\">",
             "暱稱:".$rows["pname"]."</br>",
             "LV:".$rows["level"]."</br>",
@@ -71,37 +70,36 @@ body{
 <h1 style="text-align:center;">Happy Farm</h1>
 <div id="rr" align="center">
 <?php
-
 $sql = "select  level , crops.cID , cname ,costmoney , money from player , crops  where player.pname='$id'";
-$results=mysqli_query($conn,$sql);
+$results1=mysqli_query($conn,$sql);
 
 echo"<div id=\"a\"class=\"a\" style=\"display:none;\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
 //<span id=\"get\">?</span>
-while (	$rs=mysqli_fetch_array($results)) {
-    echo "<input type=\"radio\" name=\"crops\" id=\"crops\"value=\"";
+while(	$rs=mysqli_fetch_array($results1)){
+    echo "<label><input type=\"radio\" name=\"crops\" id=\"crops\"value=\"";
     echo $rs["cID"] ;
     echo"\"></input>";
-    echo $rs["cname"];
+    echo "<img src='plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 }
 echo"<button type=\"submit\">確定</button>",
     "</div>";
-$sql1 = "select  * from player  where pname='$id'";
-$results=mysqli_query($conn,$sql1);
-if ($rs=mysqli_fetch_array($results)) {
+$sql1 = "select * from player  where pname='$id'";
+$results2=mysqli_query($conn,$sql1);
+if ($rs=mysqli_fetch_array($results2)) {
     if($rs['level']==1){
         $farm=2;
         for($i=1;$i<=$farm;$i++){
             if($i%3==0){
                 echo"<label>",
-                    "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label></br>";
+                    "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
+                    "<img src=\"1.jpg\" id=\"b\" ></label></br>";
             }
             else{
                 echo"<label>",
-                    "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label>";
+                    "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
+                    "<img src=\"1.jpg\" id=\"b\" ></label>";
             }
         }
         for($i=1;$i<=9-$farm;$i++){
@@ -115,25 +113,46 @@ if ($rs=mysqli_fetch_array($results)) {
     }
     else{
         $sql2 = "select  count(farmID) from farmplayer  where pname='$id'";
-        $results=mysqli_query($conn,$sql2);
-        if ($rs1=mysqli_fetch_array($results)) {
+        $results3=mysqli_query($conn,$sql2);
+        if ($rs1=mysqli_fetch_array($results3)) {
             $farm=$rs1['count(farmID)'];             //擁有的田數
             $nextfarm=$farm+1;
-            for($i=1;$i<=$farm;$i++){  //印出可以種的田
-                if($i%3==0){
-                    echo"<label>",
-                        "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                        "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label></br>";
-                }
-                else{
-                    echo"<label>",
-                        "<input id=\"b\" name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                        "<img src=\"1.jpg\" width=\"48px\" height=\"48px\"></label>";
-                }
+            $sqlfarming = "select farmID , cID ,(htime-ptime) ,status from farmplayer  where pname='$id'";
+            $results4=mysqli_query($conn,$sqlfarming);
+            while ($rss=mysqli_fetch_array($results4)) {
+                $a[]=$rss['status'];
+                $b[]=$rss['farmID'];
+                $c[]=$rss['cID'];
+                $d[]=$rss['(htime-ptime)'];
             }
+            $count=0;
+            $check=1;
+                for($i=1;$i<=$farm;$i++){                //印出可以種的田
+                    $count++;
+                        if($a[$i-1]==$check){        //印出有種東西的田 
+                            if($count%3==0){
+                                 echo "在".$b[$i-1]."田中種了".$c[$i-1]."</br>";
+                            }
+                            else{
+                                echo "在".$b[$i-1]."田中種了".$c[$i-1];
+                            }
+                        }
+                        else{
+                            if($i%3==0){
+                                echo"<label>",
+                                    "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
+                                    "<img src=\"1.jpg\" id=\"b\"></label></br>";
+                            }
+                            else{
+                                echo"<label>",
+                                    "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
+                                    "<img src=\"1.jpg\" id=\"b\"  ></label>";
+                            }
+                        }
+                }
             $sql3 = "select count(needlevel) from player , farm where pname='$id' and level>=needlevel ";
-            $results=mysqli_query($conn,$sql3);
-            if ($rs2=mysqli_fetch_array($results)) {
+            $results5=mysqli_query($conn,$sql3);
+            if ($rs2=mysqli_fetch_array($results5)) {
                 $buyfarm=$rs2['count(needlevel)'];  
                 $buyfarm=$buyfarm-$farm;
                 for($i=1;$i<=$buyfarm;$i++){                //印出可以買的田
