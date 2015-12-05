@@ -22,8 +22,6 @@
     echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
     echo"</div>";
 ?>
-</br></br></br></br></br></br></br>
-<h1 style="text-align:center;">Happy Farm</h1>
 <div id="rr" align="center">
 <?php
 $a=$_POST['crops'];
@@ -32,14 +30,16 @@ $b=$_POST['farm'];
 //玩家種植或採收都會損失體力與金錢 
 //每次種植或採收會賺取經驗值 
 //不同作物有不同的成熟時間，成熟後可以採收賣掉換成錢
-$sqla = "select costtime from crops where cID='$a'";
+$sqla = "select * from crops where cID='$a'";
 $results=mysqli_query($conn,$sqla);
 $rs=mysqli_fetch_array($results);
-
-
-
-$sqlb = "update farmplayer set cID='$a' , ptime=CURRENT_TIME , htime=CURRENT_TIME+".$rs['costtime']." , status=1 where pname=\"$id\" and farmID=\"$b\"";
+$sqlb = "update farmplayer set exp=exp+".$rs['pexp']." , energy=energy-".$rs['pcostenergy'].
+        " , cID='$a' , ptime=CURRENT_TIME , htime=CURRENT_TIME+".$rs['costtime'].
+        " , status=1 where pname=\"$id\" and farmID=\"$b\"";
 mysqli_query($conn,$sqlb)or die("MySQL query error");
+
+
+
 
 /*
 $sql = "select  money , pcostenergy , costtime , crops.costmoney , pexp from player , crops , farm where player.pname=\"$id\" and cID=\"$a\" and farmID=\"$b\"";
@@ -50,7 +50,7 @@ while (	$rs=mysqli_fetch_array($results)) {
     
 }
 */
-
+header("Refresh:0; url=1.php");
 ?>
 </div>
 </body>
