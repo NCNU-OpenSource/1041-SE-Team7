@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2015-12-02: 07:50:22
+-- 產生時間： 2015-12-05: 07:25:30
 -- 伺服器版本: 5.6.24
 -- PHP 版本： 5.6.8
 
@@ -87,16 +87,19 @@ CREATE TABLE IF NOT EXISTS `farmplayer` (
   `pname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `cID` int(11) NOT NULL DEFAULT '0',
   `ptime` int(11) NOT NULL,
-  `htime` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `htime` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 資料表的匯出資料 `farmplayer`
 --
 
-INSERT INTO `farmplayer` (`ID`, `farmID`, `pname`, `cID`, `ptime`, `htime`) VALUES
-(1, 1, 'user', 1, 182902, 182912),
-(2, 2, 'user', 3, 182947, 0);
+INSERT INTO `farmplayer` (`ID`, `farmID`, `pname`, `cID`, `ptime`, `htime`, `status`) VALUES
+(1, 1, 'user', 0, 0, 0, 0),
+(2, 2, 'user', 0, 0, 0, 0),
+(16, 1, 'a', 0, 0, 0, 0),
+(17, 2, 'a', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -141,9 +144,9 @@ CREATE TABLE IF NOT EXISTS `player` (
 --
 
 INSERT INTO `player` (`pID`, `pname`, `account`, `password`, `level`, `exp`, `energy`, `money`, `logintime`) VALUES
-(1, 'user', 'user', 'user', 5, 0, 30, 100, 191150),
-(2, 'a', '111', '111', 3, 0, 30, 0, 191306),
-(3, '222', '222', '222', 1, 0, 30, 100, 2147483647);
+(1, 'user', 'user', 'user', 6, 1, 29, 1999601, 142414),
+(2, 'a', '111', '111', 3, 0, 30, 500, 151207),
+(3, '222', '222', '222', 1, 0, 30, 100, 0);
 
 --
 -- 已匯出資料表的索引
@@ -197,7 +200,7 @@ ALTER TABLE `farm`
 -- 使用資料表 AUTO_INCREMENT `farmplayer`
 --
 ALTER TABLE `farmplayer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- 使用資料表 AUTO_INCREMENT `food`
 --
