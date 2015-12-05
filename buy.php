@@ -23,7 +23,7 @@
         $sql3 = "update player set money=money-".$rs['costmoney']." where pname='$id'";
         mysqli_query($conn,$sql3);
     }
-    header("Refresh:0; url=1.php");
+ header("Location:1.php");
 ?>
 </body>
 </html>
