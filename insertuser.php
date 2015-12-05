@@ -26,6 +26,7 @@ $pwd=mysqli_real_escape_string($conn,$_POST['pwd']);
 $name=mysqli_real_escape_string($conn,$_POST['pname']);
 
 if ($id) {
+	//insert into DB
     $sql = "insert into player (account, password, pname) values ('$id', '$pwd', '$name');";
     mysqli_query($conn,$sql) or die("MySQL insert message error"); //執行SQL
     echo "player registered.";
