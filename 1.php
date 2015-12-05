@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Happy Farm</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
         src="countdown.min.js">
 </script>
@@ -30,7 +31,7 @@ function start(){
         new Countdown({
             selector: '.timer<?php echo $bb[$i-1];?>',
             msgBefore: "",
-            msgAfter: "<?php echo "<a href='harvest.php?farmID=".$bb[$i-1]."&cID=".$cc[$i-1]."' ><img src='plant".$cc[$i-1].".png'></a>";?>",                   
+            msgAfter: "<?php echo "<a href='harvest.php?farmID=".$bb[$i-1]."&cID=".$cc[$i-1]."' ><img src='img/plant".$cc[$i-1].".png'></a>";?>",                   
             msgPattern: "{seconds}",
             dateStart: new Date(),
             dateEnd: new Date(new Date().getTime()+(<?php echo $dd[$i-1];?> * 1000)),
@@ -124,7 +125,7 @@ while(	$rs=mysqli_fetch_array($results1)){
         echo "<label><input type=\"radio\" name=\"crops\"  id=\"crops\" checked value=\"";
         echo $rs["cID"] ;
         echo"\"></input>";
-        echo "<img src='plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        echo "<img src='img/plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     }
 }
 echo"<button type=\"submit\" onclick=\"b()\">確定</button>",
@@ -148,10 +149,10 @@ if ($rs=mysqli_fetch_array($results2)) {
         }
         for($i=1;$i<=9-$farm;$i++){
             if(($i+($farm%3))%3==0){
-                echo"<img src=\"2.jpg\"></br>";
+                echo"<img src=\"img/2.png\"></br>";
             }
             else{
-                echo"<img src=\"2.jpg\">";
+                echo"<img src=\"img/2.png\">";
             }
         }
     }
@@ -176,23 +177,23 @@ if ($rs=mysqli_fetch_array($results2)) {
                         if($a[$i-1]==$check){        //印出有種東西的田 
                             if($count%3==0){
                                 echo "<span id=\"upper\" class=\"timer".$b[$i-1]."\"></span>";
-                                echo "<img src=\"growing.png\"></br>";
+                                echo "<img src=\"img/growing.png\"></br>";
                             }
                             else{
                                 echo "<span id=\"upper\" class=\"timer".$b[$i-1]."\"></span>";
-                                echo "<img src=\"growing.png\">";
+                                echo "<img src=\"img/growing.png\">";
                             }
                         }
                         else{
                             if($i%3==0){
                                 echo"<label>",
                                     "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                                    "<img src=\"1.jpg\" id=\"b\"></label></br>";
+                                    "<img src=\"img/1.jpg\" id=\"b\"></label></br>";
                             }
                             else{
                                 echo"<label>",
                                     "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                                    "<img src=\"1.jpg\" id=\"b\"  ></label>";
+                                    "<img src=\"img/1.jpg\" id=\"b\"  ></label>";
                             }
                         }
                 }
@@ -204,20 +205,20 @@ if ($rs=mysqli_fetch_array($results2)) {
                 for($i=1;$i<=$buyfarm;$i++){                //印出可以買的田
                     if(($i+($farm%3))%3==0){
                         echo"<a href='buy.php?nextfarm=".$nextfarm."' OnClick=\"return confirm('確定要購買嗎？')\";>
-                            <img src=\"3.gif\"></a></br>";
+                            <img src=\"img/3.gif\"></a></br>";
                     }
                     else{
                         echo"<a href='buy.php?nextfarm=".$nextfarm."' OnClick=\"return confirm('確定要購買嗎？')\";>
-                            <img src=\"3.gif\"></a>";
+                            <img src=\"img/3.gif\"></a>";
                     }
                 }
             }
             for($i=1;$i<=9-($farm+$buyfarm);$i++){//印出尚未開啟的田
                 if(($i+(($buyfarm+$farm)%3))%3==0){
-                        echo"<img src=\"2.jpg\"></br>";
+                        echo"<img src=\"img/2.png\"></br>";
                     }
                     else{
-                        echo"<img src=\"2.jpg\">";
+                        echo"<img src=\"img/2.png\">";
                     }
             }
         }
@@ -226,7 +227,7 @@ if ($rs=mysqli_fetch_array($results2)) {
     echo "</form><div id=\"main\"></div>";
 ?>
 </div>
-<script src="countdown.min.js">
+<script src="js/countdown.min.js">
 </script>
 <button onclick="start()">計時</button>
 <div class="timer"></div>
