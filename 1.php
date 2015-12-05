@@ -30,7 +30,7 @@ function start(){
         new Countdown({
             selector: '.timer<?php echo $bb[$i-1];?>',
             msgBefore: "",
-            msgAfter: "<?php echo "<a href='harvest.php?farmID=".$bb[$i-1]."' ><img src='plant".$cc[$i-1].".png'></a>";?>",                   
+            msgAfter: "<?php echo "<a href='harvest.php?farmID=".$bb[$i-1]."&cID=".$cc[$i-1]."' ><img src='plant".$cc[$i-1].".png'></a>";?>",                   
             msgPattern: "{seconds}",
             dateStart: new Date(),
             dateEnd: new Date(new Date().getTime()+(<?php echo $dd[$i-1];?> * 1000)),
@@ -113,17 +113,19 @@ img{
 ?>
 <div id="rr" align="center">
 <?php
-$sql = "select  level , crops.cID , cname ,costmoney , money from player , crops  where player.pname='$id'";
+$sql = "select  level , crops.cID , cname ,costmoney , money , needlevel from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
 
 echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
 while(	$rs=mysqli_fetch_array($results1)){
-    echo "<label><input type=\"radio\" name=\"crops\"  id=\"crops\" checked value=\"";
-    echo $rs["cID"] ;
-    echo"\"></input>";
-    echo "<img src='plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    if($rs['level']>=$rs['needlevel']){
+        echo "<label><input type=\"radio\" name=\"crops\"  id=\"crops\" checked value=\"";
+        echo $rs["cID"] ;
+        echo"\"></input>";
+        echo "<img src='plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    }
 }
 echo"<button type=\"submit\" onclick=\"b()\">確定</button>",
     "</div>";
