@@ -1,34 +1,64 @@
 <?php
     include"isset.php";
+    $id=$_SESSION['uID'];
+    $sqla = "select count(farmID) as r from farmplayer  where pname='$id' and status=1";
+    $resultsta=mysqli_query($conn,$sqla);
+    $rsa=mysqli_fetch_array($resultsta);
+    $sqltimer = "select farmID , cID ,(htime-ptime) as time ,status from farmplayer  where pname='$id' and status=1";
+            $resultst=mysqli_query($conn,$sqltimer);
+            while ($rst=mysqli_fetch_array($resultst)) {
+                $aa[]=$rst['status'];
+                $bb[]=$rst['farmID'];
+                $cc[]=$rst['cID'];
+                $dd[]=$rst['time'];
+            }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        src="countdown.min.js">
 </script>
 <script>
-var tbl="";
 $(document).ready(function(){
-  $("input").click(function(){
-    $(".a").show();
-    document.getElementById('b').onclick=getvalue(this.value);
-  });
+    $("input").click(function(){
+        $(".a").show();
+    });
 });
-function getvalue(value){
-    document.getElementById('get').innerHTML=value;
+function start(){
+    <?php for($i=1;$i<=$rsa['r'];$i++){?>
+        new Countdown({
+            selector: '.timer<?php echo $bb[$i-1];?>',
+            msgBefore: "",
+            msgAfter: "<?php echo "<a href='harvest.php?farmID=".$bb[$i-1]."' ><img src='plant".$cc[$i-1].".png'></a>";?>",                   
+            msgPattern: "{seconds}",
+            dateStart: new Date(),
+            dateEnd: new Date(new Date().getTime()+(<?php echo $dd[$i-1];?> * 1000)),
+            onStart: function() {
+                console.log('start');
+            },
+            onEnd: function() { 
+                console.log('end');
+            },
+        });
+    <?php   };?>
+};
+window.onload=function(){
+    start();
 }
 </script>
 <style type="text/css">
 body{
-    background-color:#EEEEE0;
+    background-color:#8FBC8F;
     font-size:18px;
 }
 #top{
     text-align:right;
 }
-#b{
-    width:48px; 
-    height:48px;
+img{
+    width:60px; 
+    height:60px;
+    margin:4px;
 }
     label > input{
         visibility: hidden;
@@ -47,16 +77,31 @@ body{
     width:200px;
     border:2px solid #BBBBBB;
 }
+.a{
+    display:none; 
+    border:2px solid; 
+    background-color:#999911; 
+    margin:2px; 
+    width:40%; 
+    position:fixed;
+    top:180px;
+    right:410px;
+}
+#upper{
+    position:absolute;
+    font-size:25px;
+    color:#FFB6C1;
+}
 </style>
 </head>
 <body>
 <?php
-    $id=$_SESSION['uID'];
     echo"<div id=\"top\">";
     echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
     echo"</div>";
     $sql1 = "select  * from player  where pname='$id'";
     $results=mysqli_query($conn,$sql1);
+    echo"</br></br></br><h1 style=\"text-align:center;\">Happy Farm</h1>";
     if($rows=mysqli_fetch_array($results)){
         echo"<div id=\"column\">",
             "暱稱:".$rows["pname"]."</br>",
@@ -66,24 +111,21 @@ body{
             "金錢:".$rows["money"]."</br></div>";
     }
 ?>
-</br></br></br>
-<h1 style="text-align:center;">Happy Farm</h1>
 <div id="rr" align="center">
 <?php
 $sql = "select  level , crops.cID , cname ,costmoney , money from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
 
-echo"<div id=\"a\"class=\"a\" style=\"display:none;\">",
+echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
-//<span id=\"get\">?</span>
 while(	$rs=mysqli_fetch_array($results1)){
-    echo "<label><input type=\"radio\" name=\"crops\" id=\"crops\"value=\"";
+    echo "<label><input type=\"radio\" name=\"crops\"  id=\"crops\" checked value=\"";
     echo $rs["cID"] ;
     echo"\"></input>";
     echo "<img src='plant".$rs["cID"].".png' id=\"b\"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 }
-echo"<button type=\"submit\">確定</button>",
+echo"<button type=\"submit\" onclick=\"b()\">確定</button>",
     "</div>";
 $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
@@ -131,10 +173,12 @@ if ($rs=mysqli_fetch_array($results2)) {
                     $count++;
                         if($a[$i-1]==$check){        //印出有種東西的田 
                             if($count%3==0){
-                                 echo "在".$b[$i-1]."田中種了".$c[$i-1]."</br>";
+                                echo "<span id=\"upper\" class=\"timer".$b[$i-1]."\"></span>";
+                                echo "<img src=\"growing.png\"></br>";
                             }
                             else{
-                                echo "在".$b[$i-1]."田中種了".$c[$i-1];
+                                echo "<span id=\"upper\" class=\"timer".$b[$i-1]."\"></span>";
+                                echo "<img src=\"growing.png\">";
                             }
                         }
                         else{
@@ -180,5 +224,9 @@ if ($rs=mysqli_fetch_array($results2)) {
     echo "</form><div id=\"main\"></div>";
 ?>
 </div>
+<script src="countdown.min.js">
+</script>
+<button onclick="start()">計時</button>
+<div class="timer"></div>
 </body>
 </html>
