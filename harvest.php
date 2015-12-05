@@ -45,7 +45,7 @@ while (	$rs=mysqli_fetch_array($results)) {
     
 }
 */
- header("Refresh:0; url=1.php");
+ header("Location:1.php");
 ?>
 </div>
 </body>
