@@ -114,13 +114,13 @@ img{
 ?>
 <div id="rr" align="center">
 <?php
-$sql = "select  level , crops.cID , cname ,costmoney , money , needlevel from player , crops  where player.pname='$id'";
+$sql = "select  level , cID , needlevel from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
 
 echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
-while(	$rs=mysqli_fetch_array($results1)){
+while($rs=mysqli_fetch_array($results1)){
     if($rs['level']>=$rs['needlevel']){
         echo "<label><input type=\"radio\" name=\"crops\"  id=\"crops\" checked value=\"";
         echo $rs["cID"] ;
