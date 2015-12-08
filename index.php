@@ -8,7 +8,7 @@
 <body>
     <div class="wrapper">
         <div class="container">
-            <h1>Welcome to Happy Farm, Please Login</h1>
+            <h1>Welcome to Happy Farm</br> Please Login</h1>
             <form class="form" method="post" action="login.php">
                 <input type="text" placeholder="Username" name="id">
                 <input type="password" placeholder="Password" name="pwd">
