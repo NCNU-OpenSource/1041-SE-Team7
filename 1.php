@@ -151,12 +151,12 @@ if ($rs=mysqli_fetch_array($results2)) {
             if($i%3==0){
                 echo"<label>",
                     "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\" id=\"b\" ></label></br>";
+                    "<img src=\"img/1.jpg\" id=\"b\" ></label></br>";
             }
             else{
                 echo"<label>",
                     "<input name=\"farm\" value=\"$i\" type=\"radio\"></input>",
-                    "<img src=\"1.jpg\" id=\"b\" ></label>";
+                    "<img src=\"img/1.jpg\" id=\"b\" ></label>";
             }
         }
         for($i=1;$i<=9-$farm;$i++){
