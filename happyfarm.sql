@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2015-12-05: 07:25:30
+-- 產生時間： 2015-12-08: 09:12:17
 -- 伺服器版本: 5.6.24
 -- PHP 版本： 5.6.8
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `crops` (
 INSERT INTO `crops` (`cID`, `cname`, `costtime`, `pcostenergy`, `hcostenergy`, `costmoney`, `sellmoney`, `pexp`, `hexp`, `needlevel`) VALUES
 (1, '玉米', 10, 1, 1, 1, 1, 1, 1, 1),
 (2, '罌粟花', 20, 2, 2, 2, 2, 2, 2, 1),
-(3, '貴到靠盃的菜', 50, 3, 3, 500, 300, 3, 3, 3);
+(3, '貴到靠盃的菜', 30, 3, 3, 500, 300, 3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `farmplayer` (
   `farmID` int(11) NOT NULL,
   `pname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `cID` int(11) NOT NULL DEFAULT '0',
-  `ptime` int(11) NOT NULL,
-  `htime` int(11) NOT NULL,
+  `ptime` bigint(30) NOT NULL,
+  `htime` bigint(20) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `farmplayer` (
 --
 
 INSERT INTO `farmplayer` (`ID`, `farmID`, `pname`, `cID`, `ptime`, `htime`, `status`) VALUES
-(1, 1, 'user', 0, 0, 0, 0),
+(1, 1, 'user', 3, 1449584817, 1449584847, 1),
 (2, 2, 'user', 0, 0, 0, 0),
 (16, 1, 'a', 0, 0, 0, 0),
 (17, 2, 'a', 0, 0, 0, 0);
@@ -135,18 +135,17 @@ CREATE TABLE IF NOT EXISTS `player` (
   `level` int(11) NOT NULL DEFAULT '1',
   `exp` int(11) NOT NULL DEFAULT '0',
   `energy` int(11) NOT NULL DEFAULT '30',
-  `money` int(11) NOT NULL DEFAULT '100',
-  `logintime` int(40) NOT NULL
+  `money` int(11) NOT NULL DEFAULT '100'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 資料表的匯出資料 `player`
 --
 
-INSERT INTO `player` (`pID`, `pname`, `account`, `password`, `level`, `exp`, `energy`, `money`, `logintime`) VALUES
-(1, 'user', 'user', 'user', 6, 1, 29, 1999601, 142414),
-(2, 'a', '111', '111', 3, 0, 30, 500, 151207),
-(3, '222', '222', '222', 1, 0, 30, 100, 0);
+INSERT INTO `player` (`pID`, `pname`, `account`, `password`, `level`, `exp`, `energy`, `money`) VALUES
+(1, 'user', 'user', 'user', 6, 277, -247, 2008339),
+(2, 'a', '111', '111', 3, 0, 30, 500),
+(3, '222', '222', '222', 1, 0, 30, 100);
 
 --
 -- 已匯出資料表的索引
