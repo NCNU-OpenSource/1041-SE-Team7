@@ -12,8 +12,6 @@ mysqli_query($conn,$sql) or die("Query Fail! ".mysqli_error($conn));
             $_SESSION['uID'] = $row['pname'];
             $id=$_SESSION['uID'];
             header("Refresh:0; url=1.php");
-            $sql1= "update `player` set logintime=CURRENT_TIME where pname='".$row['pname']."'";
-            mysqli_query($conn,$sql1) or die(mysqli_error($conn)); //∞ı¶ÊSQL
             exit(0);
         }
         else {
