@@ -7,7 +7,7 @@
     $sqla = "select count(farmID) as r from farmplayer  where pname='$id' and status=1";
     $resultsta=mysqli_query($conn,$sqla);
     $rsa=mysqli_fetch_array($resultsta);
-    $sqltimer = "select farmID , farmplayer.cID ,costtime , ptime , htime from farmplayer , crops  where pname='$id' and status=1 and farmplayer.cID=crops.cID";
+    $sqltimer = "select farmID , farmplayer.cID , htime from farmplayer , crops  where pname='$id' and status=1 and farmplayer.cID=crops.cID";
             $resultst=mysqli_query($conn,$sqltimer);
             while ($rst=mysqli_fetch_array($resultst)) {
                 $fid[]=$rst['farmID'];
@@ -26,6 +26,9 @@
 $(document).ready(function(){
     $("input").click(function(){
         $(".a").show();
+    });
+    $(".bag").click(function(){
+        $(".bag_content").toggle();
     });
 });
 function start(){
@@ -94,6 +97,19 @@ img{
     position:absolute;
     font-size:25px;
     color:#FFB6C1;
+}
+#bag_style{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+}
+.bag_content{
+    border:2px solid ;
+    width:800px;
+    hieght:500px;
+    position:absolute;
+    top:200px;
+    left:250px;
 }
 </style>
 </head>
@@ -244,10 +260,22 @@ if ($rs=mysqli_fetch_array($results2)) {
         }
     }
 }
-echo "</form><div id=\"main\"></div>";
+echo "</form>";
+echo "<div class=\"bag_content\" style=\"display:none; background-color:red; opacity:0.85;\">";
+echo "<h3>背包內容</h3>";
+$sqlbag = "select * from foodplayer where pname='$id' ";
+$resultsbag=mysqli_query($conn,$sqlbag);
+$rsbag=mysqli_fetch_array($resultsbag);
+while($rsbag=mysqli_fetch_array($results1)){
+    
+
+}
+echo"<button class=\"bag\">返回</button>";
+echo "</div>";
 ?>
 </div>
 <script src="js/countdown.min.js">
 </script>
+<button class="bag" id="bag_style" style="background-image:url(img/bag.jpg);width:136px;height:200px;"></button>
 </body>
 </html>
