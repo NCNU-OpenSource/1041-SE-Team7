@@ -11,9 +11,9 @@
             <h1>註冊新帳號 </h1>
             <form method="post" action="insertuser.php">
             <!--輸入註冊的帳密，名字-->
-                <input type="text" placeholder="Username" name="id">
+                <input type="text" placeholder="Account" name="acc">
                 <input type="password" placeholder="Password" name="pwd">
-                <input type="text" placeholder="Name" name="pname">
+                <input type="text" placeholder="NickName" name="pname">
                 <button type="submit" id="login-button">Register</button>
             </form>
         </div>

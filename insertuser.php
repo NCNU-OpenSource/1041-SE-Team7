@@ -21,14 +21,18 @@ mysqli_query($conn,"SET NAMES utf8"); //選擇編碼
 <hr />
 <p>
 <?php
-$id=mysqli_real_escape_string($conn,$_POST['id']);
+$acc=mysqli_real_escape_string($conn,$_POST['acc']);
 $pwd=mysqli_real_escape_string($conn,$_POST['pwd']);
-$name=mysqli_real_escape_string($conn,$_POST['pname']);
+$pname=mysqli_real_escape_string($conn,$_POST['pname']);
 
-if ($id) {
+if ($pname) {
 	//insert into DB
-    $sql = "insert into player (account, password, pname) values ('$id', '$pwd', '$name');";
+    $sql = "insert into player (account, password, pname) values ('$acc', '$pwd', '$pname');";
     mysqli_query($conn,$sql) or die("MySQL insert message error"); //執行SQL
+    $sql1 = "insert into farmplayer (farmID, pname) values (1 , '$pname');";
+    $sql2 = "insert into farmplayer (farmID, pname) values (2 , '$pname');";
+    mysqli_query($conn,$sql1) or die("MySQL insert message error");
+    mysqli_query($conn,$sql2) or die("MySQL insert message error");
     echo "player registered.";
 } else {
 	echo "empty id, cannot insert.";
