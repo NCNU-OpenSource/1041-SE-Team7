@@ -29,6 +29,11 @@ $(document).ready(function(){
     });
     $(".bag").click(function(){
         $(".bag_content").toggle();
+        $(".KFC_content").hide();
+    });
+    $(".KFC").click(function(){
+        $(".KFC_content").toggle();
+        $(".bag_content").hide();
     });
 });
 function start(){
@@ -55,7 +60,7 @@ window.onload=function(){
 </script>
 <style type="text/css">
 body{
-    background-color:#8FBC8F;
+    background-color:#008866;
     font-size:18px;
 }
 #top{
@@ -75,7 +80,7 @@ img{
         border:2px solid transparent;
 }
     label > input:checked + img{
-        border:2px solid #AAAAFF;
+        border:2px solid #FFB3FF;
 }
 #column{
     background-color:#EEEEFF;
@@ -105,11 +110,28 @@ img{
 }
 .bag_content{
     border:2px solid ;
-    width:800px;
+    width:450px;
     hieght:500px;
     position:absolute;
-    top:200px;
-    left:250px;
+    top:140px;
+    left:450px;
+}
+#KFC_style{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+}
+.KFC_content{
+    border:2px solid ;
+    width:400px;
+    hieght:500px;
+    position:absolute;
+    top:150px;
+    left:480px;
+}
+.buyfood{
+    text-decoration:none;
+    color:#000000; 
 }
 </style>
 </head>
@@ -159,7 +181,7 @@ $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
 if ($rs=mysqli_fetch_array($results2)) {
     
-    
+    echo"<div style=\" background-image:url(img/grass.jpg); width:300px;\">";
                   /*一等玩家*/
     if($rs['level']==1){
         $farm=2;
@@ -258,24 +280,42 @@ if ($rs=mysqli_fetch_array($results2)) {
                 }
             }
         }
+        echo"</div>";
     }
 }
 echo "</form>";
-echo "<div class=\"bag_content\" style=\"display:none; background-color:red; opacity:0.85;\">";
+
+               /*以下為背包內容*/
+echo "<div class=\"bag_content\" style=\"display:none; background-image:url(img/bag_bg.jpg); opacity:0.85;\">";
 echo "<h3>背包內容</h3>";
-$sqlbag = "select * from foodplayer where pname='$id' ";
+$sqlbag = "select fname , quantum , foodplayer.fID , energyup from foodplayer , food where pname='$id' and food.fID=foodplayer.fID and quantum>0 ";
 $resultsbag=mysqli_query($conn,$sqlbag);
-$rsbag=mysqli_fetch_array($resultsbag);
-while($rsbag=mysqli_fetch_array($results1)){
-    
+while($rsbag=mysqli_fetch_array($resultsbag)){
+    echo "<a class=\"eatfood\" href='eatfood.php?fID=".$rsbag['fID']."' OnClick=\"return confirm('確定要吃".$rsbag['fname']."嗎？可以恢復".$rsbag['energyup']."點體力')\";><img src=\"img/food.png\">".$rsbag['fname']."</a>";
+    echo "*".$rsbag['quantum']."</br>";
 
 }
-echo"<button class=\"bag\">返回</button>";
+echo"</br></br>";
+echo"<button class=\"bag\" style=\"background-color:white;\">返回</button>";
+echo "</div>";
+
+                /*以下為商店*/
+echo "<div class=\"KFC_content\" style=\"display:none; background-image:url(img/shop_bg.jpg); opacity:0.85;\">";
+echo "<h3>商店</h3>";
+$sqlfood = "select * from food ";
+$resultsfood=mysqli_query($conn,$sqlfood);
+while($rsfood=mysqli_fetch_array($resultsfood)){
+    echo"<a class=\"buyfood\" href='buyfood.php?fID=".$rsfood['fID']."' OnClick=\"return confirm('確定要購買".$rsfood['fname']."嗎？')\";><img src=\"img/food.png\">".$rsfood['fname']."</a>";
+    echo"$".$rsfood['costmoney']."</br>";
+}
+echo"</br></br>";
+echo"<button class=\"KFC\" style=\"background-color:white;\">返回</button>";
 echo "</div>";
 ?>
 </div>
 <script src="js/countdown.min.js">
 </script>
 <button class="bag" id="bag_style" style="background-image:url(img/bag.jpg);width:136px;height:200px;"></button>
+<button class="KFC" id="KFC_style" style="background-image:url(img/KFC.jpg);width:140px;height:133px;"></button>
 </body>
 </html>
