@@ -315,7 +315,7 @@ echo "</div>";
 </div>
 <script src="js/countdown.min.js">
 </script>
-<button class="bag" id="bag_style" style="background-image:url(img/bag.jpg);width:136px;height:200px;"></button>
-<button class="KFC" id="KFC_style" style="background-image:url(img/KFC.jpg);width:140px;height:133px;"></button>
+<button class="bag" id="bag_style" style="background-image:url(img/bag.png);width:136px;height:200px;"></button>
+<button class="KFC" id="KFC_style" style="background-image:url(img/KFC.png);width:140px;height:133px;"></button>
 </body>
 </html>
