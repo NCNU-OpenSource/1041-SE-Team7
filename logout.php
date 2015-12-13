@@ -1,9 +1,3 @@
-<?php
-    include"isset.php";
-//將session清空
-unset($_SESSION['uID']);
-header("Refresh:5;url=index.html");
-?>
 <html>
 <head>
     <meta charset="UTF-8" />
