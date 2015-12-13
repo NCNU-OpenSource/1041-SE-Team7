@@ -9,12 +9,12 @@
     <div class="wrapper">
         <div class="container">
             <h1>註冊新帳號 </h1>
-            <form method="post" action="index.html">
+            <form>
             <!--輸入註冊的帳密，名字-->
                 <input type="text" placeholder="Account" name="acc">
                 <input type="password" placeholder="Password" name="pwd">
                 <input type="text" placeholder="NickName" name="pname">
-                <button type="submit" id="login-button">Register</button>
+                <button type="submit" id="login-button"><a href="index.html">Register</a></button>
             </form>
         </div>
         <ul class="bg-bubbles">
