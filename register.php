@@ -9,7 +9,7 @@
     <div class="wrapper">
         <div class="container">
             <h1>註冊新帳號 </h1>
-            <form method="post" action="insertuser.php">
+            <form method="post" action="index.html">
             <!--輸入註冊的帳密，名字-->
                 <input type="text" placeholder="Account" name="acc">
                 <input type="password" placeholder="Password" name="pwd">
