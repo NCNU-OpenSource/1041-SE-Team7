@@ -1,23 +1,7 @@
 <?php
-    include"isset.php";
-    $id=$_SESSION['uID'];
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-</script>
-<script>
-</script>
-<style type="text/css">
-#top{
-    text-align:right;
-}
-</style>
-</head>
-<body>
-<div id="rr" align="center">
-<?php
+include"isset.php";
+$id=$_SESSION['uID'];
+/* GET傳來的值*/
 $a=$_GET['farmID'];
 $b=$_GET['cID'];
 
@@ -34,7 +18,6 @@ mysqli_query($conn,$sql);
 
 
 
-
                        /*等級提升*/
 $levelup = "select  level , exp from player where pname='$id'";
 $result=mysqli_query($conn,$levelup);
@@ -47,6 +30,3 @@ if($rowlv=mysqli_fetch_array($result)){
 
  header("Location:1.php");
 ?>
-</div>
-</body>
-</html>
