@@ -41,6 +41,15 @@ $sqlc = "update player set exp=exp+".$rs['pexp']." , energy=energy-".$rs['pcoste
 mysqli_query($conn,$sqlc)or die(mysqli_error($conn));
 
 
+                       /*等級提升*/
+$levelup = "select  level , exp from player where pname='$id'";
+$result=mysqli_query($conn,$levelup);
+if($rowlv=mysqli_fetch_array($result)){
+    if($rowlv['exp']>=100*$rowlv['level']){
+        $sqllvup = "update player set level=level+1 , exp=exp".-100*$rowlv['level']." where pname='$id'";
+        mysqli_query($conn,$sqllvup);
+   }
+}
 
 /*
 $sql = "select  money , pcostenergy , costtime , crops.costmoney , pexp from player , crops , farm where player.pname=\"$id\" and cID=\"$a\" and farmID=\"$b\"";

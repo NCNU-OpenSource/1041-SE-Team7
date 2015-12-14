@@ -20,10 +20,8 @@
 <?php
 $a=$_GET['farmID'];
 $b=$_GET['cID'];
-//資料庫要改 金錢 然後再1.php要倒數計時
-//玩家種植或採收都會損失體力與金錢 
-//每次種植或採收會賺取經驗值 
-//不同作物有不同的成熟時間，成熟後可以採收賣掉換成錢
+
+
 $sql = "update farmplayer set status=0 , cID=0 , ptime=0 , htime=0 where farmID='$a' and pname='$id'";
 mysqli_query($conn,$sql);
 
@@ -36,15 +34,17 @@ mysqli_query($conn,$sql);
 
 
 
-/*
-$sql = "select  money , pcostenergy , costtime , crops.costmoney , pexp from player , crops , farm where player.pname=\"$id\" and cID=\"$a\" and farmID=\"$b\"";
-$results=mysqli_query($conn,$sql);
 
-while (	$rs=mysqli_fetch_array($results)) {
-    echo $a,$b;
-    
+                       /*等級提升*/
+$levelup = "select  level , exp from player where pname='$id'";
+$result=mysqli_query($conn,$levelup);
+if($rowlv=mysqli_fetch_array($result)){
+    if($rowlv['exp']>=100*$rowlv['level']){
+        $sqllvup = "update player set level=level+1 , exp=exp".-100*$rowlv['level']." where pname='$id'";
+        mysqli_query($conn,$sqllvup);
+   }
 }
-*/
+
  header("Location:1.php");
 ?>
 </div>
