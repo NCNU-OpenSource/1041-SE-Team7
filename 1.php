@@ -1,19 +1,19 @@
 <?php
-    include"isset.php";
-    $id=$_SESSION['uID'];
+include"isset.php";
+$id=$_SESSION['uID'];
     
     
                         /*以下都在javascript裡使用*/
-    $sqla = "select count(farmID) as r from farmplayer  where pname='$id' and status=1";
-    $resultsta=mysqli_query($conn,$sqla);
-    $rsa=mysqli_fetch_array($resultsta);
-    $sqltimer = "select farmID , farmplayer.cID , htime from farmplayer , crops  where pname='$id' and status=1 and farmplayer.cID=crops.cID";
-            $resultst=mysqli_query($conn,$sqltimer);
-            while ($rst=mysqli_fetch_array($resultst)) {
-                $fid[]=$rst['farmID'];
-                $cid[]=$rst['cID'];
-                $endtime[]=$rst['htime'];
-            }
+$sqla = "select count(farmID) as r from farmplayer  where pname='$id' and status=1";
+$resultsta=mysqli_query($conn,$sqla);
+$rsa=mysqli_fetch_array($resultsta);
+$sqltimer = "select farmID , farmplayer.cID , htime from farmplayer , crops  where pname='$id' and status=1 and farmplayer.cID=crops.cID";
+$resultst=mysqli_query($conn,$sqltimer);
+while ($rst=mysqli_fetch_array($resultst)) {
+    $fid[]=$rst['farmID'];
+    $cid[]=$rst['cID'];
+    $endtime[]=$rst['htime'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -136,31 +136,32 @@ img{
 </head>
 <body>
 <?php
-    echo"<div id=\"top\">";
-    echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
-    echo"</div>";
-    echo"</br></br></br><h1 style=\"text-align:center;\">Happy Farm</h1>";
+
+echo"<div id=\"top\">";
+echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
+echo"</div>";
+echo"</br></br></br><h1 style=\"text-align:center;\">Happy Farm</h1>";
     
     
                    /*玩家狀態欄*/
-    $sql1 = "select  * from player  where pname='$id'";
-    $results=mysqli_query($conn,$sql1);
-    if($rows=mysqli_fetch_array($results)){
-        echo"<div id=\"column\">",
-            "暱稱:".$rows["pname"]."</br>",
-            "LV:".$rows["level"]."</br>",
-            "EXP:".$rows["exp"]."  (差".(100-$rows['exp'])."exp升級)</br>",
-            "能量:".$rows["energy"]."</br>",
-            "金錢:".$rows["money"]."</br></div>";
-    }
+$sql1 = "select  * from player  where pname='$id'";
+$results=mysqli_query($conn,$sql1);
+if($rows=mysqli_fetch_array($results)){
+    echo"<div id=\"column\">",
+        "暱稱:".$rows["pname"]."</br>",
+        "LV:".$rows["level"]."</br>",
+        "EXP:".$rows["exp"]."  (差".(100*$rows['level']-$rows['exp'])."exp升級)</br>",
+        "能量:".$rows["energy"]."</br>",
+        "金錢:".$rows["money"]."</br></div>";
+}
 ?>
 <div align="center">
 <?php
 echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
-    
-    
+
+
                   /*印出可以種植的農作物*/
 $sql = "select  level , cID , needlevel from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
@@ -174,34 +175,32 @@ while($rs=mysqli_fetch_array($results1)){
 }
 echo"<button type=\"submit\">確定</button>",
     "</div>";
-    
-                  /*以下為印出田的所有狀態(135-241)*/
+
+                  /*以下為印出田的所有狀態*/
 $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
-if ($rs=mysqli_fetch_array($results2)) {
-    
+if($rs=mysqli_fetch_array($results2)){
     echo"<div style=\" background-image:url(img/grass.jpg); width:300px;\">";
-                 
-                 
-                 
+
+
                        /*農地UI*/
     $sql2 = "select  count(farmID) from farmplayer  where pname='$id'";
     $results3=mysqli_query($conn,$sql2);
-    if ($rs1=mysqli_fetch_array($results3)) {
+    if($rs1=mysqli_fetch_array($results3)){
         $farm=$rs1['count(farmID)'];             
         $nextfarm=$farm+1;
         $sqlfarming = "select farmID , status from farmplayer  where pname='$id'";
         $results4=mysqli_query($conn,$sqlfarming);
-        while ($rss=mysqli_fetch_array($results4)) {
+        while($rss=mysqli_fetch_array($results4)){
             $a[]=$rss['status'];
             $b[]=$rss['farmID'];
         }
-        
-            
+
+
                                /*玩家已解鎖可以自由運用的田*/
         $count=0;
         $check=1;
-        for($i=1;$i<=$farm;$i++){                
+        for($i=1;$i<=$farm;$i++){
             $count++;
             if($a[$i-1]==$check){        //印出有種東西的田 
                 if($count%3==0){
@@ -226,8 +225,8 @@ if ($rs=mysqli_fetch_array($results2)) {
                 }
             }
         }
-                
-                
+
+
                             /*印出可以買的田*/
         $sql3 = "select count(needlevel) from player , farm where pname='$id' and level>=needlevel ";
         $results5=mysqli_query($conn,$sql3);
@@ -244,19 +243,20 @@ if ($rs=mysqli_fetch_array($results2)) {
                      <img src=\"img/3.gif\"></a>";
             }
         }
-            
-            
-                    /*印出尚未開啟的田*/
-            for($i=1;$i<=9-($farm+$buyfarm);$i++){
-                if(($i+(($buyfarm+$farm)%3))%3==0){
-                    echo"<img src=\"img/2.png\"></br>";
-                }
-                else{
-                    echo"<img src=\"img/2.png\">";
-                }
+
+
+
+                /*印出尚未開啟的田*/
+        for($i=1;$i<=9-($farm+$buyfarm);$i++){
+            if(($i+(($buyfarm+$farm)%3))%3==0){
+                echo"<img src=\"img/2.png\"></br>";
+            }
+            else{
+                echo"<img src=\"img/2.png\">";
             }
         }
-        echo"</div>";
+    }
+    echo"</div>";
 }
 echo "</form>";
 
