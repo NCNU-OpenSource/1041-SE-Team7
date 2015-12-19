@@ -4,7 +4,7 @@
 商店      done
 CSS美化..........................ugly
 經驗值及等級提升功能還沒做   done
-金錢的限制(不能負)
+金錢的限制(不能負)    done
 
 
 PPT:https://www.emaze.com/@AFOCOFOW/proxy
