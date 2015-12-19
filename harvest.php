@@ -6,7 +6,7 @@ $a=$_GET['farmID'];
 $b=$_GET['cID'];
 
 
-$sql = "update farmplayer set status=0 , cID=0 , ptime=0 , htime=0 where farmID='$a' and pname='$id'";
+$sql = "update farmplayer set status=0 , cID=0 , htime=0 where farmID='$a' and pname='$id'";
 mysqli_query($conn,$sql);
 
 

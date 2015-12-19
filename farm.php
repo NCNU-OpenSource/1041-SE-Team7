@@ -29,7 +29,7 @@ if($r['money']<$rs['costmoney']){
 else{
     $time=date('U');
     $time=$time+25200;
-    $sqlb = "update farmplayer set cID='$a' , ptime=$time , htime=$time+".$rs['costtime']." , status=1 where pname=\"   $id\" and farmID=\"$b\"";
+    $sqlb = "update farmplayer set cID='$a' , htime=$time+".$rs['costtime']." , status=1 where pname=\"$id\" and farmID=\"$b\"";
     mysqli_query($conn,$sqlb)or die("MySQL query error");
     $sqlc = "update player set exp=exp+".$rs['pexp']." , energy=energy-".$rs['pcostenergy']."
             , money=money-".$rs['costmoney']." where pname=\"$id\" ";
