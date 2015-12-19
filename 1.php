@@ -18,6 +18,7 @@ while ($rst=mysqli_fetch_array($resultst)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Happy Farm</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
         src="countdown.min.js">
@@ -61,78 +62,9 @@ window.onload=function(){
 <style type="text/css">
 body{
     background-image:url(img/main_bg.jpg);
-    font-size:18px;
-    background-size:cover;
-}
-#top{
-    text-align:right;
-}
-img{
-    width:60px; 
-    height:60px;
-    margin:4px;
-}
-    label > input{
-        visibility: hidden;
-        position: absolute;
-}
-    label > input + img{ 
-        cursor:pointer;
-        border:2px solid transparent;
-}
-    label > input:checked + img{
-        border:2px solid #FFB3FF;
-}
-#column{
-    background-color:#EEEEFF;
-    display:block;
-    width:200px;
-    border:2px solid #BBBBBB;
-}
-.a{
-    display:none; 
-    border:2px solid; 
-    background-color:#999911; 
-    margin:2px; 
-    width:40%; 
-    position:fixed;
-    top:180px;
-    right:410px;
-}
-#upper{
-    position:absolute;
-    font-size:25px;
-    color:#FFB6C1;
-}
-#bag_style{
-    position:absolute;
-    bottom:0px;
-    left:0px;
-}
-.bag_content{
-    border:2px solid ;
-    width:450px;
-    position:absolute;
-    top:140px;
-    left:450px;
-}
-#KFC_style{
-    position:absolute;
-    bottom:0px;
-    right:0px;
-}
-.KFC_content{
-    border:2px solid ;
-    width:400px;
-    position:absolute;
-    top:150px;
-    left:480px;
-}
-.buyfood{
-    text-decoration:none;
-    color:#000000; 
 }
 </style>
+	<link rel="stylesheet" href="css/1.css">
 </head>
 <body>
 <?php

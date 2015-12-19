@@ -1,0 +1,80 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@media (max-width: @screen-xs-max) { ... }
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+@media (min-width: @screen-lg-min) { ... }
+*{
+    font-family: "·L³n¥¿¶ÂÅé","Microsoft JhengHei",'Source Sans Pro', sans-serif;
+}
+body{
+    font-size:18px;
+    background-size:cover;
+}
+#top{
+    text-align:right;
+}
+img{
+    width:60px; 
+    height:60px;
+    margin:4px;
+}
+    label > input{
+        visibility: hidden;
+        position: absolute;
+}
+    label > input + img{ 
+        cursor:pointer;
+        border:2px solid transparent;
+}
+    label > input:checked + img{
+        border:2px solid #FFB3FF;
+}
+#column{
+    background-color:#EEEEFF;
+    display:block;
+    width:200px;
+    border:2px solid #BBBBBB;
+}
+.a{
+    display:none; 
+    border:2px solid; 
+    background-color:#999911; 
+    margin:2px; 
+    width:40%; 
+    position:fixed;
+    top:180px;
+    right:410px;
+}
+#upper{
+    position:absolute;
+    font-size:25px;
+    color:#FFB6C1;
+}
+#bag_style{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+}
+.bag_content{
+    border:2px solid ;
+    width:450px;
+    position:absolute;
+    top:140px;
+    left:450px;
+}
+#KFC_style{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+}
+.KFC_content{
+    border:2px solid ;
+    width:400px;
+    position:absolute;
+    top:150px;
+    left:480px;
+}
+.buyfood{
+    text-decoration:none;
+    color:#000000; 
+}
