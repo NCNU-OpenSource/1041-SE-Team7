@@ -1,12 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
-@media (max-width: @screen-xs-max) { ... }
-@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
-@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
-@media (min-width: @screen-lg-min) { ... }
 *{
     font-family: "·L³n¥¿¶ÂÅé","Microsoft JhengHei",'Source Sans Pro', sans-serif;
 }
 body{
+    background:top no-repeat url('../img/main_bg.jpg');
     font-size:18px;
     background-size:cover;
 }
@@ -51,6 +48,9 @@ img{
     color:#FFB6C1;
 }
 #bag_style{
+    background-image:url('../img/bag.png');
+    width:136px;
+    height:200px;
     position:absolute;
     bottom:0px;
     left:0px;
