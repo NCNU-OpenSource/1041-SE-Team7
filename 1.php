@@ -18,27 +18,32 @@ while ($rst=mysqli_fetch_array($resultst)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Happy Farm</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- 選擇性佈景主題 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <title>Happy Farm</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
         src="countdown.min.js">
-</script>
-<script>
-$(document).ready(function(){
-    $("input").click(function(){
-        $(".a").show();
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("input").click(function(){
+            $(".a").show();
+        });
+        $(".bag").click(function(){
+            $(".bag_content").toggle();
+            $(".KFC_content").hide();
+        });
+        $(".KFC").click(function(){
+            $(".KFC_content").toggle();
+            $(".bag_content").hide();
+        });
     });
-    $(".bag").click(function(){
-        $(".bag_content").toggle();
-        $(".KFC_content").hide();
-    });
-    $(".KFC").click(function(){
-        $(".KFC_content").toggle();
-        $(".bag_content").hide();
-    });
-});
-function start(){
-    <?php for($i=1;$i<=$rsa['r'];$i++){?>
+    function start(){
+        <?php for($i=1;$i<=$rsa['r'];$i++){?>
         new Countdown({
             selector: '.timer<?php echo $fid[$i-1];?>',
             msgBefore: "",
@@ -53,17 +58,12 @@ function start(){
                 console.log('end');
             },
         });
-    <?php   };?>
-};
-window.onload=function(){
+        <?php   };?>
+    };
+    window.onload=function(){
     start();
-}
-</script>
-<style type="text/css">
-body{
-    background-image:url(img/main_bg.jpg);
-}
-</style>
+    }
+    </script>
 	<link rel="stylesheet" href="css/1.css">
 </head>
 <body>
@@ -194,18 +194,7 @@ echo "</form>";
 
 
                /*以下為背包內容*/
-echo "<div class=\"bag_content\" style=\"display:none; background-image:url(img/bag_bg.jpg); opacity:0.85;\">";
-echo "<h3>背包內容</h3>";
-$sqlbag = "select fname , quantum , foodplayer.fID , energyup from foodplayer , food where pname='$id' and food.fID=foodplayer.fID and quantum>0 ";
-$resultsbag=mysqli_query($conn,$sqlbag);
-while($rsbag=mysqli_fetch_array($resultsbag)){
-    echo "<a class=\"eatfood\" href='eatfood.php?fID=".$rsbag['fID']."' OnClick=\"return confirm('確定要吃".$rsbag['fname']."嗎？可以恢復".$rsbag['energyup']."點體力')\";><img src=\"img/food.png\">".$rsbag['fname']."</a>";
-    echo "*".$rsbag['quantum']."</br>";
 
-}
-echo"</br></br>";
-echo"<button class=\"bag\" style=\"background-color:white;\">返回</button>";
-echo "</div>";
 
 
                 /*以下為商店*/
@@ -222,9 +211,34 @@ echo"<button class=\"KFC\" style=\"background-color:white;\">返回</button>";
 echo "</div>";
 ?>
 </div>
-<script src="js/countdown.min.js">
-</script>
-<button class="bag" id="bag_style" style="background-image:url(img/bag.png);width:136px;height:200px;"></button>
+<!-- Large modal -->
+<button type="button" class="bag btn btn-primary" id="bag_style" data-toggle="modal" data-target=".bs-example-modal-lg"></button>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <?php
+            
+echo "<h3>背包內容</h3>";
+$sqlbag = "select fname , quantum , foodplayer.fID , energyup from foodplayer , food where pname='$id' and food.fID=foodplayer.fID and quantum>0 ";
+$resultsbag=mysqli_query($conn,$sqlbag);
+while($rsbag=mysqli_fetch_array($resultsbag)){
+    echo "<a class=\"eatfood\" href='eatfood.php?fID=".$rsbag['fID']."' OnClick=\"return confirm('確定要吃".$rsbag['fname']."嗎？可以恢復".$rsbag['energyup']."點體力')\";><img src=\"img/food.png\">".$rsbag['fname']."</a>";
+    echo "*".$rsbag['quantum']."</br>";
+
+}
+echo"</br></br>";
+echo"<button class=\"bag btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
+
+        ?>
+    </div>
+  </div>
+</div>
+
+
 <button class="KFC" id="KFC_style" style="background-image:url(img/KFC.png);width:140px;height:133px;"></button>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- 最新編譯和最佳化的 JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="js/countdown.min.js"></script>
 </body>
 </html>
