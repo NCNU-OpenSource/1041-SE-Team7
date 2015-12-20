@@ -5,15 +5,12 @@ $id=$_SESSION['uID'];
 $a=$_POST['crops'];
 $b=$_POST['farm'];
 
-<<<<<<< HEAD
             /*檢查玩家金錢足夠與否*/
 $sql0 = "select money from player where pname='$id'";
 $result0=mysqli_query($conn,$sql0);
 $r=mysqli_fetch_array($result0);
 
 
-=======
->>>>>>> origin/master
 
 $sqla = "select * from crops where cID='$a'";
 $results=mysqli_query($conn,$sqla);
@@ -25,11 +22,10 @@ if($r['money']<$rs['costmoney']){
     header("refresh:2.5;url=1.php");
     exit();
 }
-<<<<<<< HEAD
 else{
     $time=date('U');
     $time=$time+25200;
-    $sqlb = "update farmplayer set cID='$a' , ptime=$time , htime=$time+".$rs['costtime']." , status=1 where pname=\"   $id\" and farmID=\"$b\"";
+    $sqlb = "update farmplayer set cID='$a' , htime=$time+".$rs['costtime']." , status=1 where pname=\"$id\" and farmID=\"$b\"";
     mysqli_query($conn,$sqlb)or die("MySQL query error");
     $sqlc = "update player set exp=exp+".$rs['pexp']." , energy=energy-".$rs['pcostenergy']."
             , money=money-".$rs['costmoney']." where pname=\"$id\" ";
@@ -46,7 +42,6 @@ else{
         }
     }
 }
-=======
->>>>>>> origin/master
+
  header("Location:1.php");
 ?>
