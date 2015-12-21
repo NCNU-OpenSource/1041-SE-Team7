@@ -63,6 +63,9 @@ img{
     left:450px;
 }
 #KFC_style{
+    background-image:url('../img/KFC.png');
+    width:140px;
+    height:133px;
     position:absolute;
     bottom:0px;
     right:0px;
@@ -77,4 +80,7 @@ img{
 .buyfood{
     text-decoration:none;
     color:#000000; 
+}
+.modal-content{
+    text-align:center;
 }

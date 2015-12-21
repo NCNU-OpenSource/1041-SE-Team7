@@ -191,51 +191,50 @@ if($rs=mysqli_fetch_array($results2)){
     echo"</div>";
 }
 echo "</form>";
-
-
-               /*以下為背包內容*/
-
-
-
-                /*以下為商店*/
-echo "<div class=\"KFC_content\" style=\"display:none; background-image:url(img/shop_bg.jpg); opacity:0.85;\">";
-echo "<h3>商店</h3>";
-$sqlfood = "select * from food ";
-$resultsfood=mysqli_query($conn,$sqlfood);
-while($rsfood=mysqli_fetch_array($resultsfood)){
-    echo"<a class=\"buyfood\" href='buyfood.php?fID=".$rsfood['fID']."' OnClick=\"return confirm('確定要購買".$rsfood['fname']."嗎？')\";><img src=\"img/food.png\">".$rsfood['fname']."</a>";
-    echo"$".$rsfood['costmoney']."</br>";
-}
-echo"</br></br>";
-echo"<button class=\"KFC\" style=\"background-color:white;\">返回</button>";
-echo "</div>";
 ?>
 </div>
-<!-- Large modal -->
-<button type="button" class="bag btn btn-primary" id="bag_style" data-toggle="modal" data-target=".bs-example-modal-lg"></button>
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<!-- 背包-Large modal -->
+<button type="button" class="bag btn btn-link" id="bag_style" data-toggle="modal" data-target="#bag_script"></button>
+<div class="modal fade bs-example-modal-sm" id="bag_script" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
         <?php
-            
-echo "<h3>背包內容</h3>";
-$sqlbag = "select fname , quantum , foodplayer.fID , energyup from foodplayer , food where pname='$id' and food.fID=foodplayer.fID and quantum>0 ";
-$resultsbag=mysqli_query($conn,$sqlbag);
-while($rsbag=mysqli_fetch_array($resultsbag)){
-    echo "<a class=\"eatfood\" href='eatfood.php?fID=".$rsbag['fID']."' OnClick=\"return confirm('確定要吃".$rsbag['fname']."嗎？可以恢復".$rsbag['energyup']."點體力')\";><img src=\"img/food.png\">".$rsbag['fname']."</a>";
-    echo "*".$rsbag['quantum']."</br>";
-
-}
-echo"</br></br>";
-echo"<button class=\"bag btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
-
+            /*以下為背包內容*/
+            echo "<h3>背包內容</h3>";
+            $sqlbag = "select fname , quantum , foodplayer.fID , energyup from foodplayer , food where pname='$id' and food.fID=foodplayer.fID and quantum>0 ";
+            $resultsbag=mysqli_query($conn,$sqlbag);
+            while($rsbag=mysqli_fetch_array($resultsbag)){
+                echo "<a class=\"eatfood\" href='eatfood.php?fID=".$rsbag['fID']."' OnClick=\"return confirm('確定要吃".$rsbag['fname']."嗎？可以恢復".$rsbag['energyup']."點體力')\";><img src=\"img/food.png\">".$rsbag['fname']."</a>";
+                echo "*".$rsbag['quantum']."</br>";
+            }
+            echo"</br></br>";
+            echo"<button class=\"bag btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
+        ?>
+    </div>
+  </div>
+</div>
+<!-- 商店-Large modal -->
+<button type="button" class="KFC btn btn-link" id="KFC_style" data-toggle="modal" data-target="#shop_script"></button>
+<div class="modal fade bs-example-modal-sm" id="shop_script" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <?php            
+            /*以下為商店*/
+            echo "<h3>商店</h3>";
+            $sqlfood = "select * from food ";
+            $resultsfood=mysqli_query($conn,$sqlfood);
+            while($rsfood=mysqli_fetch_array($resultsfood)){
+                echo"<a class=\"buyfood\" href='buyfood.php?fID=".$rsfood['fID']."' OnClick=\"return confirm('確定要購買".$rsfood['fname']."嗎？')\";><img src=\"img/food.png\">".$rsfood['fname']."</a>";
+                echo"$".$rsfood['costmoney']."</br>";
+            }
+            echo"</br></br>";
+            echo"<button class=\"KFC btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
+            echo "</div>";
         ?>
     </div>
   </div>
 </div>
 
-
-<button class="KFC" id="KFC_style" style="background-image:url(img/KFC.png);width:140px;height:133px;"></button>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
