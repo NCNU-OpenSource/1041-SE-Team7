@@ -19,7 +19,7 @@
             exit();
         }
         else{
-            $sql = "insert into farmplayer (ID, farmID, pname, cID , ptime , htime) values 
+            $sql = "insert into farmplayer (ID, farmID, pname, cID , htime) values 
                     ('', '$nextfarm','$id','0','','');";
             mysqli_query($conn,$sql) or die("MySQL insert message error"); //執行SQL
             $sql3 = "update player set money=money-".$rs['costmoney']." where pname='$id'";
