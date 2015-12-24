@@ -68,8 +68,9 @@ while ($rst=mysqli_fetch_array($resultst)) {
 </head>
 <body>
 <?php
+
 echo"<div id=\"top\">";
-echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
+echo"親愛的 ".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
 echo"</div>";
 echo"</br></br></br><h1 style=\"text-align:center;\">Happy Farm</h1>";
     
@@ -78,12 +79,19 @@ echo"</br></br></br><h1 style=\"text-align:center;\">Happy Farm</h1>";
 $sql1 = "select  * from player  where pname='$id'";
 $results=mysqli_query($conn,$sql1);
 if($rows=mysqli_fetch_array($results)){
+    $process1=($rows['exp']/(100*$rows['level']))*100;
+    $process=round($process1);
     echo"<div id=\"column\">",
         "暱稱:".$rows["pname"]."</br>",
         "LV:".$rows["level"]."</br>",
-        "EXP:".$rows["exp"]."  (差".(100*$rows['level']-$rows['exp'])."exp升級)</br>",
         "能量:".$rows["energy"]."</br>",
-        "金錢:".$rows["money"]."</br></div>";
+        "金錢$:".$rows["money"]."</br>",
+        "Exp:".$rows["exp"]."  (需要".(100*$rows['level']-$rows['exp'])."Exp 升級)",
+        "<div class=\"progress\">",
+            "<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"$process\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:$process%; min-width:20px;\">",
+                "$process%",
+            "</div>",
+        "</div></div>";
 }
 ?>
 <div align="center">
@@ -91,6 +99,8 @@ if($rows=mysqli_fetch_array($results)){
 echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
+
+
                   /*印出可以種植的農作物*/
 $sql = "select  level , cID , needlevel from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
@@ -104,11 +114,15 @@ while($rs=mysqli_fetch_array($results1)){
 }
 echo"<button type=\"submit\">確定</button>",
     "</div>";
+?>
+<?php
                   /*以下為印出田的所有狀態*/
 $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
 if($rs=mysqli_fetch_array($results2)){
     echo"<div style=\" background-image:url(img/grass.jpg); width:300px;\">";
+
+
                        /*農地UI*/
     $sql2 = "select  count(farmID) from farmplayer  where pname='$id'";
     $results3=mysqli_query($conn,$sql2);
@@ -121,6 +135,8 @@ if($rs=mysqli_fetch_array($results2)){
             $a[]=$rss['status'];
             $b[]=$rss['farmID'];
         }
+
+
                                /*玩家已解鎖可以自由運用的田*/
         $count=0;
         $check=1;
@@ -149,6 +165,8 @@ if($rs=mysqli_fetch_array($results2)){
                 }
             }
         }
+
+
                             /*印出可以買的田*/
         $sql3 = "select count(needlevel) from player , farm where pname='$id' and level>=needlevel ";
         $results5=mysqli_query($conn,$sql3);
@@ -165,6 +183,9 @@ if($rs=mysqli_fetch_array($results2)){
                      <img src=\"img/3.gif\"></a>";
             }
         }
+
+
+
                 /*印出尚未開啟的田*/
         for($i=1;$i<=9-($farm+$buyfarm);$i++){
             if(($i+(($buyfarm+$farm)%3))%3==0){
@@ -195,7 +216,7 @@ echo "</form>";
                 echo "*".$rsbag['quantum']."</br>";
             }
             echo"</br></br>";
-            echo"<button class=\"bag btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
+            echo"<button class=\"bag btn btn-warning btn-block\" data-dismiss=\"modal\">返回</button>";
         ?>
     </div>
   </div>
@@ -210,17 +231,20 @@ echo "</form>";
             echo "<h3>商店</h3>";
             $sqlfood = "select * from food ";
             $resultsfood=mysqli_query($conn,$sqlfood);
-            while($rsfood=mysqli_fetch_array($resultsfood)){
-                echo"<a class=\"buyfood\" href='buyfood.php?fID=".$rsfood['fID']."' OnClick=\"return confirm('確定要購買".$rsfood['fname']."嗎？')\";><img src=\"img/food.png\">".$rsfood['fname']."</a>";
-                echo"$".$rsfood['costmoney']."</br>";
-            }
-            echo"</br></br>";
-            echo"<button class=\"KFC btn btn-default\" data-dismiss=\"modal\" style=\"background-color:white;\">返回</button>";
+            echo"<div class=\"showui\">";
+                while($rsfood=mysqli_fetch_array($resultsfood)){
+                    echo"<a class=\"buyfood\" href='buyfood.php?fID=".$rsfood['fID']."' OnClick=\"return confirm('確定要購買".$rsfood['fname']."嗎？')\";><img src=\"img/food.png\">".$rsfood['fname']."</a>";
+                    echo"$".$rsfood['costmoney']."</br>";
+                }
+                echo"</br></br>";
+            echo"</div>";
+            echo"<button class=\"KFC btn btn-warning btn-block\" data-dismiss=\"modal\">返回</button>";
             echo "</div>";
         ?>
     </div>
   </div>
 </div>
+
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
