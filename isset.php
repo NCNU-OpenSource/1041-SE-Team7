@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION["uID"])){
-        header("Refresh:0.1;url=index.php");
+        header("Refresh:0.1;url=index.html");
     }
     $host = 'localhost';
     $user = 'myid';

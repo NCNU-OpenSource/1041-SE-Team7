@@ -68,7 +68,6 @@ while ($rst=mysqli_fetch_array($resultst)) {
 </head>
 <body>
 <?php
-
 echo"<div id=\"top\">";
 echo"親愛的".$id."，您好！<a href=\"logout.php\" STYLE=\"text-decoration:none\">登出</a>";
 echo"</div>";
@@ -92,8 +91,6 @@ if($rows=mysqli_fetch_array($results)){
 echo"<div id=\"a\"class=\"a\">",
     "<form method='post' action='farm.php'>",
     "要種甚麼呢?</br>";
-
-
                   /*印出可以種植的農作物*/
 $sql = "select  level , cID , needlevel from player , crops  where player.pname='$id'";
 $results1=mysqli_query($conn,$sql);
@@ -107,14 +104,11 @@ while($rs=mysqli_fetch_array($results1)){
 }
 echo"<button type=\"submit\">確定</button>",
     "</div>";
-
                   /*以下為印出田的所有狀態*/
 $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
 if($rs=mysqli_fetch_array($results2)){
     echo"<div style=\" background-image:url(img/grass.jpg); width:300px;\">";
-
-
                        /*農地UI*/
     $sql2 = "select  count(farmID) from farmplayer  where pname='$id'";
     $results3=mysqli_query($conn,$sql2);
@@ -127,8 +121,6 @@ if($rs=mysqli_fetch_array($results2)){
             $a[]=$rss['status'];
             $b[]=$rss['farmID'];
         }
-
-
                                /*玩家已解鎖可以自由運用的田*/
         $count=0;
         $check=1;
@@ -157,8 +149,6 @@ if($rs=mysqli_fetch_array($results2)){
                 }
             }
         }
-
-
                             /*印出可以買的田*/
         $sql3 = "select count(needlevel) from player , farm where pname='$id' and level>=needlevel ";
         $results5=mysqli_query($conn,$sql3);
@@ -175,9 +165,6 @@ if($rs=mysqli_fetch_array($results2)){
                      <img src=\"img/3.gif\"></a>";
             }
         }
-
-
-
                 /*印出尚未開啟的田*/
         for($i=1;$i<=9-($farm+$buyfarm);$i++){
             if(($i+(($buyfarm+$farm)%3))%3==0){
@@ -234,7 +221,6 @@ echo "</form>";
     </div>
   </div>
 </div>
-
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- 最新編譯和最佳化的 JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
