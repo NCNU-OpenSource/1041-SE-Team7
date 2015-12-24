@@ -1,5 +1,6 @@
 <?php
 session_start();
+sleep(1);
 $host = 'localhost';
 $user = 'myid';
 $pass = '12345';

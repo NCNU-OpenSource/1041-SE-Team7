@@ -1,5 +1,6 @@
 <?php
 include"isset.php";
+sleep(1);
 $_SESSION['uID'] = "";
 $account = isset($_POST["user_name"]) ? $_POST["user_name"] : $_GET["user_name"];
 $passWord = isset($_POST["user_password"]) ? $_POST["user_password"] : $_GET["user_password"];
