@@ -120,7 +120,7 @@ echo"<button type=\"submit\">確定</button>",
 $sql1 = "select * from player  where pname='$id'";
 $results2=mysqli_query($conn,$sql1);
 if($rs=mysqli_fetch_array($results2)){
-    echo"<div style=\" background-image:url(img/grass.jpg); width:300px;\">";
+    echo"<div id=\"main_land\">";
 
 
                        /*農地UI*/

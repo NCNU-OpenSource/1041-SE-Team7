@@ -9,6 +9,7 @@ body{
 }
 #top{
     text-align:right;
+    color:#669900;
 }
 img{
     width:60px; 
@@ -26,25 +27,38 @@ img{
     label > input:checked + img{
         border:2px solid #FFB3FF;
 }
+h1{
+    font-size:50px;
+}
 #column{
     background-color:#EEEEFF;
     display:block;
     width:250px;
-    border:2px solid #BBBBBB;
+    border:7px solid #336600;
     padding-left:5px;
     padding-right:5px;
     padding-top:5px;
     margin-left:10px;
+    border-radius: 15px;
+    color:#00b300;
 }
 .a{
     display:none; 
-    border:2px solid; 
+    border:5px solid #336600; 
     background-color:#999911; 
     margin:2px; 
     width:40%; 
     position:fixed;
     top:180px;
     right:410px;
+    border-radius: 15px;
+}
+#main_land{
+    background-color:#ffff4d;
+    width:350px;
+    border:10px solid #336600; 
+    border-radius: 15px;
+    padding:15px;
 }
 #upper{
     position:absolute;
@@ -52,9 +66,9 @@ img{
     color:#FFB6C1;
 }
 #bag_style{
-    background-image:url('../img/bag.png');
-    width:136px;
-    height:200px;
+    background:no-repeat url('../img/bag.png');
+    width:150px;
+    height:150px;
     position:absolute;
     bottom:10px;
     left:10px;
@@ -67,9 +81,9 @@ img{
     left:450px;
 }
 #KFC_style{
-    background-image:url('../img/KFC.png');
-    width:140px;
-    height:133px;
+    background:no-repeat url('../img/KFC.png');
+    width:150px;
+    height:150px;
     position:absolute;
     bottom:10px;
     right:10px;
