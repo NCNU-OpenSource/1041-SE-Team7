@@ -2,8 +2,8 @@
 ===================================
 ##To Do List:
 -----------------------------------
-    [-]CSS美化-AndrewWang
-    [-]icon backround UI color 風格統一-nanoha1fate, QingyaoJiang
+    [x]CSS美化-AndrewWang
+    [x]icon backround UI color 風格統一-nanoha1fate, QingyaoJiang
     [-]升等效果-leyu102213017
     [x]背景音樂-leyu102213017
     [-]遊戲平衡
