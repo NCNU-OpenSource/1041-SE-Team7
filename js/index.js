@@ -92,8 +92,8 @@ function userregister(){
             if(msg2 =="success"){
                 location.replace("index.html");   
             }else{    
-                $('#error_msg').show();
-                $('#error_msg').html('Register Fail, Please try again');
+                $('#error_msg2').show();
+                $('#error_msg2').html('Register Fail, Please try again');
             }
         },
         error:function(xhr){
