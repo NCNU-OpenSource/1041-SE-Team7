@@ -2,7 +2,17 @@
 include"isset.php";
 $id=$_SESSION['uID'];
     
-    
+    if(isset($_SESSION['levelup'])){
+        $levelup=$_SESSION['levelup'];
+        if($_SESSION['levelup']==1){
+            ?>
+            <script>
+                alert("恭喜您升等囉！");
+            </script>
+            <?php
+            $_SESSION['levelup']=0;
+        }
+    }
                         /*以下都在javascript裡使用*/
 $sqla = "select count(farmID) as r from farmplayer  where pname='$id' and status=1";
 $resultsta=mysqli_query($conn,$sqla);

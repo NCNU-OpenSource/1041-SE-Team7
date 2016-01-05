@@ -24,6 +24,7 @@ $result=mysqli_query($conn,$levelup);
 if($rowlv=mysqli_fetch_array($result)){
     if($rowlv['exp']>=100*$rowlv['level']){
         $sqllvup = "update player set level=level+1 , exp=exp".-100*$rowlv['level']." where pname='$id'";
+        $_SESSION['levelup'] = 1;
         mysqli_query($conn,$sqllvup);
    }
 }
