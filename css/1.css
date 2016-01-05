@@ -54,6 +54,7 @@ h1{
     border-radius: 15px;
 }
 #main_land{
+    background:url('../img/grass.jpg');
     background-color:#ffff4d;
     width:350px;
     border:10px solid #336600; 
