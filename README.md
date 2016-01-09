@@ -1,5 +1,5 @@
 # 1041-SE-Team7
-===================================
+
 ##To Do List:
 
 - [x] CSS美化-AndrewWang
@@ -12,7 +12,6 @@
 
 ==================================
 Use case:
-
 ![GitHub Logo](https://github.com/NCNU-OpenSource/1041-SE-Team7/blob/master/schedule-report/final/use%20case.PNG)<br>
 
 
