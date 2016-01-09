@@ -12,6 +12,7 @@
 ##Use case:
 ![GitHub Logo](https://github.com/NCNU-OpenSource/1041-SE-Team7/blob/master/schedule-report/final/usecase.png)<br>
 ##DFD:
-##Class diagram
+##Class diagram:
+![GitHub Logo](https://github.com/NCNU-OpenSource/1041-SE-Team7/blob/master/schedule-report/final/ClassDiagram.png)<br>
 
 ##PPT:https://www.emaze.com/@AFOCOFOW/proxy
